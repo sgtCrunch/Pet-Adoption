@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %}Pet Adoption{% endblock %}
+{% block h1 %}Add a Pet{% endblock %}
+
+{% block content %}
+<br>
+
+<div class="row">
+
+    <div class="col-sm-3">
+
+        {% if pet.photo_url == 'profile.png' %}
+        <img src="{{ url_for('static', filename='profile.png') }}" width="100%" class="img-thumbnail">
+        {% else %}
+        <img src="{{ pet.photo_url }}" class="img-thumbnail" width="100%">
+        {% endif %}
+
+        <h5>Name: {{ pet.name }}</h5>
+        <h5>Species: {{ pet.species }}</h5>
+        <h5>Age: {{ pet.age }}</h5>
+    </div>
+
+    <div class="col-sm-3">
+        <form method="POST">
+            <div class="form-group">
+                {{ form.hidden_tag() }}
+
+                {{ wtf.quick_form(form) }}
+                
+                <br>
+                <button class="btn btn-primary" type="submit">Update</button>
+            </div>
+        </form>
+    </div>
+
+</div>
+
+
+{% endblock %}

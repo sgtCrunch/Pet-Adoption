@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block title %}Pet Adoption{% endblock %}
+{% block h1 %}Pets{% endblock %}
+
+{% block content %}
+<br>
+
+<div class="row">
+    
+        {% for pet in pets %}
+        <div class="col-sm-2 text-center">
+            {% if pet.photo_url == 'profile.png' %}
+            <img src="{{ url_for('static', filename='profile.png') }}" width="100%" class="img-thumbnail">
+            {% else %}
+            <img src="{{ pet.photo_url }}" class="img-thumbnail" width="100%">
+            {% endif %}
+
+            <h6>
+                {{ pet.name }}
+
+                <span class="text-muted">
+                    {% if pet.available == True %}
+                    is available!
+                    {% else %}
+                    is not available!         
+                    {% endif %}
+                </span>
+                <br>
+                <a href="/{{ pet.id }}">
+                    <i class="fa fa-edit"></i>
+                </a>
+            </h6>
+        </div>
+        {% endfor %}
+    
+</div>
+
+<br>
+
+<div class="row">
+
+    <div class="col-sm-4">
+        <form action="/add">
+            <button type="submit" class="btn btn-primary">Add a Pet</button>
+        </form>
+    </div>
+
+</div>
+
+{% endblock %}
